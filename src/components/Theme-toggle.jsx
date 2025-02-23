@@ -1,6 +1,7 @@
 import { Link, useOutletContext } from "react-router-dom";
 
 export default function ToggleTheme() {
+  const { setTheme } = useOutletContext();
   const themes = [
     "light",
     "dark",
@@ -37,6 +38,7 @@ export default function ToggleTheme() {
   ];
 
   const handleChangeTheme = (theme) => {
+    setTheme(theme);
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   };
