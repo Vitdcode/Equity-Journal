@@ -16,3 +16,11 @@
   display: grid;
   grid-template-columns: 0.3fr 0.7fr;
 }
+
+input {
+  width: 100%;
+}
+
+fieldset {
+  font-size: 1rem;
+}

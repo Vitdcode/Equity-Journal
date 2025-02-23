@@ -43,7 +43,7 @@ function App() {
           <img
             src={logoText}
             alt="Logo Text"
-            className="bg-base-300 border-2 border-base-300 rounded-lg shadow-lg"
+            className="bg-base-300 border-2 border-base-300 rounded-lg shadow-lg w-[100%]"
           />
           <GiCash fontSize={"3rem"} className="rotate-16 absolute bottom-0 right-0" />
         </div>
@@ -64,7 +64,7 @@ function App() {
         </span>
       </div>
       <div className="flex flex-col items-center gap-20 mt-10">
-        <Outlet context={{ theme, setTheme, data, investmentReturnsRef }} />
+        <Outlet context={{ theme, setTheme, data, setData, investmentReturnsRef }} />
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import { SiCashapp } from "react-icons/si";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { TbBrandCashapp } from "react-icons/tb";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
-import PropTypes from "prop-types";
+import PropTypes, { object } from "prop-types";
 
 export default function Overview() {
   const { data, investmentReturnsRef } = useOutletContext();
@@ -39,7 +39,7 @@ export default function Overview() {
   };
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-10 ml-10 mr-10">
       <h1 className="flex items-center justify-center gap-3 bg-base-300  p-2 text-2xl mb-10 rounded-lg">
         <MdOutlineSpaceDashboard /> Overview
       </h1>
@@ -67,6 +67,11 @@ export default function Overview() {
   );
 }
 
+const Textarea = ({ data }) => {
+  const id = Object.keys(data);
+  return <textarea name="textarea" id={id} className="textarea"></textarea>;
+};
+
 const InvestmentData = ({ entry, totalAmountPerQuartal, investmentReturnsRef }) => {
   investmentReturnsRef.current.length = 0; //resetting the ref so it doesn't keep pushing the same numbers
   return (
@@ -74,22 +79,28 @@ const InvestmentData = ({ entry, totalAmountPerQuartal, investmentReturnsRef }) 
       {Object.entries(entry).map(([date, investments]) => (
         <div
           key={date}
-          className="flex flex-col items-center gap-10 bg-base-200 border border-base-300 rounded-xl p-3 "
+          className="flex flex-col  flex-wrap items-center gap-10 bg-base-200 border border-base-300 rounded-xl p-3 "
         >
           <span className="flex items-center gap-2 text-xl font-bold ">
             <FaRegCalendarAlt /> {date}
           </span>
-          <div className="flex gap-20 bg-base-100 border border-base-100 rounded-xl p-3 shadow">
-            {Object.entries(investments).map(([investmentType, amount]) => (
-              <span key={investmentType} className="flex items-center">
-                <TbBrandCashapp /> {investmentType}: ${amount.toFixed(2)}
-              </span>
-            ))}
+          <div className="flex flex-wrap gap-20 bg-base-100 border border-base-100 rounded-xl p-3 shadow">
+            {Object.entries(investments).map(([investmentType, amount]) => {
+              console.log(date);
+              if (investmentType != "Investments") {
+                return (
+                  <span key={investmentType} className="flex items-center">
+                    <TbBrandCashapp /> {investmentType}: ${amount.toFixed(2)}
+                  </span>
+                );
+              }
+            })}
             <span className="flex items-center gap-2">
               <SiCashapp />
               Total amount: ${totalAmountPerQuartal(investments).toFixed(2)}
             </span>
           </div>
+          <Textarea data={date} />
         </div>
       ))}
     </>
@@ -120,9 +131,10 @@ const InvestmentChange = ({ amount }) => {
           <span className="text-green-600">{changePercantage}%</span>
         </div>
       ) : (
-        <div>
-          <FaArrowTrendDown />
+        <div className="flex items-center justify-end mr-2 mb-2 gap-2 bg-base-300 border-1 border-base-300 w-fit ml-auto rounded-xl p-2">
           <span className="text-red-600">${change}</span>
+          <FaArrowTrendDown />
+          <span className="text-red-600">{changePercantage}%</span>
         </div>
       )}
     </div>
