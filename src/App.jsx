@@ -11,34 +11,42 @@ function App() {
   const investmentReturnsRef = useRef([]);
   const [data, setData] = useState([
     {
-      "29.07.2024": {
-        Invested: 17089,
-        "Cash Trade Republic": 4000,
-        "C24 Tagesgeld": 1714,
-        Cash: 3000,
+      id: crypto.randomUUID(),
+      date: "29.07.2024",
+      Invested: 17089,
+      "Cash Trade Republic": 4000,
+      "C24 Tagesgeld": 1714,
+      Cash: 3000,
+    },
+    {
+      id: crypto.randomUUID(),
+      date: "29.10.2024",
+      Invested: 22909.85,
+      "Cash Trade Republic": 4861.33,
+      "C24 Tagesgeld": 2003.62,
+      Cash: 3000,
+      Investments: {
+        "S&P 500": 570.3,
       },
     },
     {
-      "29.10.2024": {
-        Invested: 22909.85,
-        "Cash Trade Republic": 4861.33,
-        "C24 Tagesgeld": 2003.62,
-        Cash: 3000,
-      },
-    },
-    {
-      "01.02.2025": {
-        Invested: 29276,
-        "Cash Trade Republic": 3994,
-        "C24 Tagesgeld": 1132,
-        Cash: 3000,
+      id: crypto.randomUUID(),
+      date: "01.02.2025",
+      Invested: 29276,
+      "Cash Trade Republic": 3994,
+      "C24 Tagesgeld": 1132,
+      Cash: 3000,
+      Investments: {
+        "S&P 500": 616.8,
+        Bitcoin: 98148.0,
+        XRP: 2.87,
       },
     },
   ]);
 
   return (
     <div className="main-wrapper">
-      <div className=" h-screen flex flex-col  gap-10 bg-base-200 border border-base-300  ">
+      <div className="sticky top-0 h-screen flex flex-col gap-10 bg-base-200 border border-base-300  ">
         <div className="relative">
           <img
             src={logoText}

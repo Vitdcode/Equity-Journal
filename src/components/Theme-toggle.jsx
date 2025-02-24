@@ -1,4 +1,4 @@
-import { Link, useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 
 export default function ToggleTheme() {
   const { setTheme } = useOutletContext();

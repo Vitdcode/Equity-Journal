@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MdCalendarMonth, MdOutlineSpaceDashboard } from "react-icons/md";
+import { MdCalendarMonth } from "react-icons/md";
 import { useOutletContext } from "react-router-dom";
 
 export default function AddMonthDisplay() {
@@ -9,17 +9,24 @@ export default function AddMonthDisplay() {
   const [cashTrade, setCashTrade] = useState("");
   const [c24Cash, setC24Cash] = useState("");
   const [cash, setCash] = useState("");
+  const [sp500, setSp500] = useState("");
+  const [bitcoin, setBitcoin] = useState("");
+  const [xrp, setXrp] = useState("");
 
   const submitData = (e) => {
     e.preventDefault();
     setData([
       ...data,
       {
-        [date]: {
-          Invested: parseInt(invested),
-          "Cash Trade Republic": parseInt(cashTrade),
-          "C24 Tagesgeld": parseInt(c24Cash),
-          Cash: parseInt(cash),
+        date: date.split("-").reverse().join("."), //formats the american date format to metric date format
+        Invested: parseFloat(invested),
+        "Cash Trade Republic": parseFloat(cashTrade),
+        "C24 Tagesgeld": parseFloat(c24Cash),
+        Cash: parseFloat(cash),
+        Investments: {
+          "S&P 500": parseFloat(sp500),
+          Bitcoin: parseFloat(bitcoin),
+          XRP: parseInt(xrp),
         },
       },
     ]);
@@ -75,6 +82,37 @@ export default function AddMonthDisplay() {
             required
             value={cash}
             onChange={(e) => setCash(e.target.value)}
+          />
+        </fieldset>
+
+        <fieldset className="fieldset  bg-base-200 border border-base-300 p-4 rounded-box ">
+          <legend className="fieldset-legend">Investments</legend>
+
+          <label className="fieldset-label">S&P 500</label>
+          <input
+            type="number"
+            className="input"
+            placeholder="Amount"
+            value={sp500}
+            onChange={(e) => setSp500(e.target.value)}
+          />
+
+          <label className="fieldset-label">Bitcoin</label>
+          <input
+            type="number"
+            className="input"
+            placeholder="Amount"
+            value={bitcoin}
+            onChange={(e) => setBitcoin(e.target.value)}
+          />
+
+          <label className="fieldset-label">XRP</label>
+          <input
+            type="number"
+            className="input"
+            placeholder="Amount"
+            value={xrp}
+            onChange={(e) => setXrp(e.target.value)}
           />
         </fieldset>
 
